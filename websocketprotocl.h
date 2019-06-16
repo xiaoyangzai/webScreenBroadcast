@@ -40,7 +40,7 @@ int base64_decode( const char * base64, unsigned char * bindata );
 //响应websocket握手请求
 //@clientfd: 与客户端通信的文件描述符
 //@websocket_key: websocket握手协议中Sec-WebSocket-Key字段的值
-void do_websocket_response(int clientfd,char *websocket_key);
+void send_websocket_response(int clientfd,char *websocket_key);
 
 //64位长整型网络字节序到本地字节序的转换
 //若本地为大端存储模式，无序转换

@@ -13,7 +13,7 @@
 #include "robust_io.h"
 #include "websocketprotocl.h"
 
-void do_websocket_response(int clientfd,char *websocket_key)
+void send_websocket_response(int clientfd,char *websocket_key)
 {
 	printf("websocket Connection requestion.\n");
 	printf("Sec-WebSocket-Key: %s\n",websocket_key);
