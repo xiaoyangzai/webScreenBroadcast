@@ -13,13 +13,6 @@
 #include "robust_io.h"
 #include "websocketprotocl.h"
 
-//处理WebSocket请求
-int do_websocket(int clientfd,char *key)
-{
-	send_websocket_response(clientfd,key);
-	return 0;
-}
-
 void send_websocket_response(int clientfd,char *websocket_key)
 {
 	char response[MAXLINE];
