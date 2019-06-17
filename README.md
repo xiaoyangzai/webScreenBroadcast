@@ -8,6 +8,10 @@
 
 # 项目安装与使用
 
+## 安装JPEG库
+
+参照Linux C阶段项目的README进行安装,传送门: <https://github.com/xiaoyangzai/screenShot>
+
 ## 编译项目
 
 进入到项目源码根目录下，执行make即可生成可执行文件server
