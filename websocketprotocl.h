@@ -55,6 +55,9 @@ uint64_t htonll(uint64_t nl);
 //是否数据经过掩码
 #define IS_SETMASK(code)	(code & 0x80)
 
+//处理WebSocket请求
+int do_websocket(int clientfd,char *key);
+
 //发送websocket协议包头部
 //@clienfd: 与客户端通信的文件描述符
 //@type:协议包中数据的类型 

@@ -13,10 +13,21 @@
 #include "robust_io.h"
 #include "websocketprotocl.h"
 
+//处理WebSocket请求
+int do_websocket(int clientfd,char *key)
+{
+	send_websocket_response(clientfd,key);
+	return 0;
+}
+
 void send_websocket_response(int clientfd,char *websocket_key)
 {
+	char response[MAXLINE];
 	printf("websocket Connection requestion.\n");
 	printf("Sec-WebSocket-Key: %s\n",websocket_key);
+	base64_sha_encode(websocket_key, response);  
+	//发送websocket握手协议响应报
+	writen(clientfd,response,strlen(response));
 	return;
 }
 //获取数据长度
