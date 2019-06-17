@@ -3,7 +3,8 @@ CC=gcc
 SRCS=$(wildcard *.cpp *.c)
 TOBJS= $(patsubst %.cpp,%.o,$(SRCS))
 OBJS= $(patsubst %.c,%.o,$(TOBJS))
-LDFLAGS=-lcrypto
+LDFLAGS=-lcrypto -ljpeg -L./libjpeg/lib -lX11 -lpthread
+CFLAGS=-I./libjpeg/include
 
 
 TARGET=server

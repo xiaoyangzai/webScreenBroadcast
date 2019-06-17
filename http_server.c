@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include "robust_io.h"
 #include "websocketprotocl.h"
+#include "websocketserver.h"
 #include "http_server.h"
 
 void do_client(int fd)
@@ -28,6 +29,8 @@ void do_client(int fd)
 	//读取HTTP请求数据包的剩余数据
 	printf("HTTP header: \n%s",buf);
 
+	int is_websocket = 0;
+	char key[256];
 	while(1)
 	{
 		n = rio_readline(&rio,buf,sizeof(buf));
@@ -39,12 +42,27 @@ void do_client(int fd)
 			return;
 		}
 		printf("%s",buf);
+		if(strstr(buf,"Upgrade") && strstr(buf,"websocket"))	
+			is_websocket = 1;
+		if(strstr(buf,"Sec-WebSocket-Key"))
+			sscanf(buf,"Sec-WebSocket-Key: %s\r\n",key);
+
 		if(strcmp(buf,"\r\n") == 0)
 			break;
 	}
 	//普通GET请求
 	if(strcmp(method,"GET") == 0)
-		do_get_response(fd,url);
+	{
+		if(is_websocket)
+		{
+			//完成websocket握手响应
+			//发送屏幕图像信息
+			//接收客户端数据
+			do_websocket_response(fd,key);
+		}
+		else
+			do_get_response(fd,url);
+	}
 	else
 		do_error(fd,500,"Only Support GET Method");
 	return ;
