@@ -18,9 +18,9 @@
 </div>
 <script>
 var imgtest;
+var socket;
 function connect_to_server(){
 	console.log("connect to server.....\n");
-	var socket;
 	try{
 		//send websocket header
 		socket=new WebSocket('ws://'+document.domain+':8888');
